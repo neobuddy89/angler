@@ -1706,6 +1706,10 @@ static int parse_options(char *options, struct super_block *sb,
 				     journal_ioprio, is_remount) < 0)
 			return 0;
 	}
+
+	if (sb->s_flags & ~MS_LAZYTIME)
+		sb->s_flags |= MS_LAZYTIME;
+
 #ifdef CONFIG_QUOTA
 	if (EXT4_HAS_RO_COMPAT_FEATURE(sb, EXT4_FEATURE_RO_COMPAT_QUOTA) &&
 	    (test_opt(sb, USRQUOTA) || test_opt(sb, GRPQUOTA))) {
